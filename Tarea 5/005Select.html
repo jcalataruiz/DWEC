@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        const consultar = () => {
+            let provincias =document.getElementById("provincias");//array de los option
+            console.log(provincias);
+            let texto = provincias.options[provincias.selectedIndex].text;
+            let valor = provincias.options[provincias.selectedIndex].value;
+            alert (`Datos de la opcion seleccionada:\n\nTexto: ${texto}\nValor: ${valor}`);
+        }
+
+        
+        
+    </script>
+</head>
+<body>
+    <form action="" id="formulario">
+        <p>
+            <label for="provincias">Selecciona una provincia:</label>
+            <select name="provincias" id="provincias">
+                <option value="AL">Almeria</option>
+                <option value="JA">Jaen</option>
+                <option value="GR">Granada</option>
+                <option value="CO">COrdoba</option>
+                <option value="SE">Sevilla</option>
+                <option value="CA">Cadiz</option>
+                <option value="HU">Huelva</option>
+                <option value="MA">Málaga</option>
+            </select>
+        </p>
+        <p>
+            Selecciona una opcion y pulsa el boton.
+        </p>
+        <input type="button" name="boton" value="Consultar" onclick="consultar()">
+    </form>
+    
+    
+</body>
+</html>

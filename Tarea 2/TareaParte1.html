@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tabla de multiplicar</title>
+    <script src="Tarea2.js"></script>
+    <style>
+      .container {
+        display: flex;
+        background-color: beige;
+        justify-content: space-between;
+      }
+      #tabla {
+        background-color: azure;
+        border-radius: 5px;
+        padding: 10px;
+        width: 40em;
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="textos">
+        <h1>Tablas de multiplicar</h1>
+        <div class="tabla">
+          
+            <label for="numero">Tabla de multiplicar del 8</label>
+            <p>
+              <input type="submit" value="Mostrar tabla" onclick="mostrarTabla()" />
+            </p>
+          
+          <!-- <input type="button" value="Vaciar" onclick="vaciar()"> -->
+        </div>
+        <div class="tabla">
+          <form onsubmit="mostrarTabla1()">
+            <label for="numero">Tabla de multiplicar del 7</label>
+            <p>
+              <input type="submit" value="Mostrar tabla" />
+            </p>
+          </form>
+        </div>
+        <div class="tabla">
+          <form onsubmit="mostrarTabla2()">
+            <label for="numero">Tabla de dividir del 9</label>
+            <p>
+              <input type="submit" value="Mostrar tabla" />
+            </p>
+          </form>
+        </div>
+        <div class="tabla">
+          <form onsubmit="mostrarTabla3()">
+            <label for="numero">Tabla de multiplicar del 8</label>
+            <p>
+              <input type="submit" value="Mostrar tabla" />
+            </p>
+          </form>
+        </div>
+        <div class="tabla">
+          <form onsubmit="mostrarTabla4()">
+            <label for="numero">Tabla de multiplicar del 7</label>
+            <p>
+              <input type="submit" value="Mostrar tabla" />
+            </p>
+          </form>
+        </div>
+        <div class="tabla">
+          <form onsubmit="mostrarTabla5()">
+            <label for="numero">Tabla de dividir del 9</label>
+            <p>
+              <input type="submit" value="Mostrar tabla" />
+            </p>
+          </form>
+        </div>
+        <div class="tabla">
+          <form onsubmit="mostrarTabla6()">
+            <label for="numero">Tabla de multiplicar del 8</label>
+            <p>
+              <input type="submit" value="Mostrar tabla" />
+            </p>
+          </form>
+        </div>
+        <div class="tabla">
+          <form onsubmit="mostrarTabla7()">
+            <label for="numero">Tabla de multiplicar del 7</label>
+            <p>
+              <input type="submit" value="Mostrar tabla" />
+            </p>
+          </form>
+        </div>
+        <div class="tabla">
+          <form onsubmit="mostrarTabla8()">
+            <label for="numero">Tabla de dividir del 9</label>
+            <p>
+              <input type="submit" value="Mostrar tabla" />
+            </p>
+          </form>
+        </div>
+      </div>
+      <div class="tabla">
+        <div id="tabla"></div>
+      </div>
+    </div>
+  </body>
+</html>

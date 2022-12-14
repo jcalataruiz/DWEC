@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+    //Las operaciones son visibles por consola
+
+
+      //Operacion 125/8
+
+      let a = 125; //El numerador es 125
+
+      let b = 3; //El denominador de la primera
+      //es 3 porque hay que desplazar 3 bits a la derecha
+      // que es el equivalente a 8 (2*2*2)
+
+      console.log("El resultado de 125/8 es ", a >> b);
+      //Operacion 40x4
+
+      a = 40; //El numerador es 40
+
+      b = 2; //El denominador de la primera
+      //es 2 porque hay que desplazar  bits a la izquierda
+      // que es el equivalente a 4 (2*2)
+
+      console.log("El resultado de 40x4 es ", a << b);
+      //Operacion 25/2
+
+      a = 25; //El numerador es 25
+
+      b = 1; //El denominador de la primera
+      //es 1 porque hay que desplazar 3 bits a la derecha
+      // que es el equivalente a 2 (2*2*2)
+
+      console.log("El resultado de 25/2 es ", a >> b);
+      //Operacion 10x16
+
+      a = 10; //El numerador es 10
+
+      b = 4; //El denominador de la primera
+      //es 3 porque hay que desplazar 3 bits a la derecha
+      // que es el equivalente a 16 (2*2*2*2)
+
+      console.log("El resultado de 10x16 es ", a << b);
+    </script>
+  </body>
+</html>

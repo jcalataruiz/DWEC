@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        window.onload=function inicio(){
+            document.getElementById("actor1").onfocus=function(){
+                alert ("Hola");
+                document.getElementById("actor1").onfocus=false;
+            };
+        }
+
+        const mostrarDatos=()=>{
+            console.log(document.getElementsByName("actores"));
+            for (let i = 0; i < document.getElementsByName("actores").length; i++) {
+                if(document.getElementsByName("actores")[i].checked){
+                    alert (document.getElementsByName("actores")[i].value);
+                }
+                
+            }
+        }
+        const mostrarMensaje=()=>{
+            
+                    alert ("HOla")
+                
+                
+            }
+        
+    </script>
+</head>
+<body>
+    <h1>Trabajando con objetos input de tipo radio</h1>
+    <form id="formulario" action="">
+        <fieldset>
+            <legend>Selecciona tu actor favorito</legend>
+            <label for="actor1">Bruce Willis</label>
+            <input type="radio" name="actores" id="actor1" value="Bruce Willis - 19 de Marzo de 1955">
+            <label for="actor2">Jim Carrey</label>
+            <input type="radio" name="actores" id="actor2" value="Jim Carrey - 23 de Enero de 1967">
+            <label for="actor3">Antonio Banderas</label>
+            <input type="radio" name="actores" id="actor3" value="Antonio Banders - 19 de Marzo de 1965">
+            <input type="button" id="consultar" name ="consultar" value="Consultar mas datos" onclick="mostrarDatos()">
+        </fieldset>
+    </form>
+</body>
+</html>

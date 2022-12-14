@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>DWEC03</title>
+    <script>
+      //funcion que realiza la apertura de la ventana emergente
+      let abrirVentana = function () {
+        //Aqui creamos la nueva ventana y la abrimos.
+        let subVentana = window.open(
+          "", //URL vacia
+          "nuevaVentana", //nombre de la ventana
+          "width=800, height=600, resizable=0" //resizable=0 para que no sea redimensionable
+        );
+
+        //funcion para que aparezca "<h3>Ejemplo de Ventana Nueva</h3>"
+        subVentana.document.write("<h3>Ejemplo de Ventana Nueva</h3>");
+
+        //URL completa nos pide el ejercicio la escribimos dentro y usamos el writeln para hacer un salto de linea*
+        subVentana.document.writeln(
+          "URL completa: " + self.document.URL + "<br>"
+        );
+
+        //funcion para ver el protocolo utilizado
+        subVentana.document.writeln(
+          "Protocolo utilizado: " + self.location.protocol + "<br>"
+        );
+
+        //funcion para ver codigo del navegador
+        //Actualmente está deprecado y siempre sale como valor MOZILLA
+        //Quiza seria mas util pq da mas informacion la funcion navigator.userAgent
+        subVentana.document.writeln(
+          "Nombre en código del navegador: " + navigator.appCodeName + "<br>"
+        );
+        //Con un if sacamos por pantalla si java esta activado o no
+        if (subVentana.navigator.javaEnabled) {
+          subVentana.document.writeln("Java SI disponible en esta ventana<br>");
+        } else {
+          subVentana.document.writeln("Java NO disponible en esta ventana<br>");
+        }
+        // Abrir el iframe de un tamaño concreto
+        subVentana.document.writeln(
+          '<iframe src="https://www.google.com/webhp?igu=1" width="800" height="600"></iframe>'
+        );
+      };
+
+      //Ahora nos ponemos con la ventana principal
+      //Sacamos por pantalla en titulo.
+      document.write("<h1>TAREA DWEC03</H2><HR />");
+
+      //aqui creo una funcion para identicar cada dia de la semana con un numero del 0 al 6.
+      //es para que luego para que cuando ponga "Naciste un feliz XXXXXX del año XXXX",
+      //aparezca el dia de la semana de manera textual.
+      function diaSemana(numero) {
+        if (numero === 0) {
+          return "Domingo";
+        }
+        if (numero === 1) {
+          return "Lunes";
+        }
+        if (numero === 2) {
+          return "Martes";
+        }
+        if (numero === 3) {
+          return "Miercoles";
+        }
+        if (numero === 4) {
+          return "Jueves";
+        }
+        if (numero === 5) {
+          return "Viernes";
+        } else {
+          return "Sabado";
+        }
+      }
+
+      //Funcion para seleccionar el numero mas alto de un array
+      function masAlto(lista) {
+        let mayor = lista[0];
+        for (var i = 0; i < lista.length; i++) {
+          if (lista[i] > mayor) {
+            mayor = lista[i];
+          }
+        }
+        return mayor;
+      }
+      function mayusculas(nombre) {
+        let nombreMayusculas = nombre.toUpperCase();
+        return nombreMayusculas;
+      }
+      //Funcion para que nos pida los datos y mostrarlos por pantalla.
+      let funcion1 = () => {
+        const lista = [34, 67, 23, 75, 35, 19];
+        let fechaNacimiento = new Date();
+        let fechaActual = new Date(); //creamos una variable con la fecha de hoy
+        //Con el metodo prompt hacemos que podamos meter datos por pantalla
+        let nombre = window.prompt("Introduzca su nombre y apellidos.");
+
+        //Aqui mencionar que parseamos los datos de entrada puesto qu e sino serian variables
+        //de tipo string y no int. Y para almacenar fechas no funcionaria.
+        //almacenamos el dia de mes de nacimiento
+        fechaNacimiento.setDate(
+          parseInt(window.prompt("Introduzca su DIA de nacimiento."))
+        );
+
+        //almacenamos el mes de nacimiento. Le restamos uno porque
+        //sinó la funcion identifica el enero=0, febrero=1 y nosotros en la vida cotidiana
+        //identificamos enero=1, febrero=2. De este modo despues podemos calcular las fechas
+        // de manera correcta.
+        fechaNacimiento.setMonth(
+          parseInt(window.prompt("Introduzca su MES de nacimiento.") - 1)
+        );
+
+        //almacenamos año
+        fechaNacimiento.setFullYear(
+          parseInt(window.prompt("Introduzca su año de nacimiento."))
+        );
+
+        //Imprimimos el nombre
+        document.writeln("Buenos días " + nombre + "<br>");
+
+        //Longitud del nombre
+        document.writeln(
+          "Tu nombre tiene " +
+            nombre.length +
+            " caracteres, incluidos espacios.<br>"
+        );
+
+        //Algoritmo para saber en que posicion se encuentra la primera letra "a
+        //Da igual si mezclas mayusculas de minusculas. Saca la posicion de la letra
+        //primera letra "a" ya sea mayuscula o minuscula.
+        //Tambien te dice si no contiene letra "a"
+        if (nombre.includes("[Aa]")) {
+          document.writeln(
+            "La letra A se encuentra en la posicion: " +
+              nombre.indexOf("[Aa]") +
+              " <br>"
+          );
+        } else {
+          document.writeln("Tu nombre no contiene la A <br>");
+        }
+
+        //Eliminamos los tres primeros caracteres
+        document.writeln(
+          "Tu nombre menos las 3 primeras letras es: " +
+            nombre.substring(3) +
+            "<br>"
+        );
+
+        //Imprimimos el nombre en mayusculas
+        document.writeln(
+          "Tu nombre todo en mayúsculas es: " + nombre.toUpperCase() + "<br>"
+        );
+
+        //calculamos los años
+        document.writeln(
+          "Tu edad es: " +
+            (fechaActual.getFullYear() - fechaNacimiento.getFullYear()) +
+            " años.<br>"
+        );
+        document.writeln(
+          "Naciste un feliz " +
+            diaSemana(fechaNacimiento.getDay()) +
+            " del año " +
+            fechaNacimiento.getFullYear() +
+            ".<br>"
+        );
+
+        //calculamos el valor del coseno pasando los grados a radianes
+        document.writeln(
+          "El coseno de 180 es: " + Math.cos((180 * Math.PI) / 180) + ".<br>"
+        );
+
+        //usamos la funcion de arriba para sacar el numero mas alto del Array
+        document.writeln(
+          "El número mayor de (34,67,23,75,35,19) es: " +
+            masAlto(lista) +
+            " .<br>"
+        );
+
+        //sacamos un numero al azar entre 0 y 10. Parseamos para que sea un numero entero.
+        document.writeln(
+          "Ejemplo de número al azar entre 0 y 10: " +
+            parseInt(Math.random() * 10) +
+            " <br>"
+        );
+      };
+    </script>
+  </head>
+  <body>
+    <!--dentro de la pagina princiapl he creado 2 botones.
+    Uno para iniciar la funcion de introducir datos y sacarlos por pantalla
+  en la pagina principal y otro para brir la subventana-->
+    <p>Introduzca sus datos</p>
+    <p>
+      <!--Boton que lanza la funcion de la ventana principal-->
+      <input
+        type="button"
+        id="cuestionario"
+        value="Aceptar"
+        onclick="funcion1()"
+      />
+    </p>
+    <!--Boton que abre la ventana (subventana)-->
+    <p>Pulse para abrir un ventana</p>
+    <p>
+      <input
+        type="button"
+        id="abrirVentana"
+        value="Pulsar"
+        onclick="abrirVentana()"
+      />
+    </p>
+  </body>
+</html>

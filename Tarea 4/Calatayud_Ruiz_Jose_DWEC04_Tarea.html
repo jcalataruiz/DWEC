@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript">
+      //Creamos la clase Edificio que nos permite crear los objetos
+      class Edificio {
+        //Creamos los atributos que se nos piden
+        calle;
+        numero;
+        codigoPostal;
+        //plantas va a ser el array bidireccional que va a guardar los nombres de los propietarios
+        //La variable i sera el numero de planta y la j el numero de puerta o piso
+        plantas = new Array();
+        
+        //Este es el metodo para crear las plantas y las puertas por planta.
+        //En el primer bucle for parte de la posicion 0 por que es el valor de la longitud
+        //del array plantas vacio. Una vez que ya hemos creado una planta partira del numero de plantas
+        //que ya tenga usando como variabñe la longitud del array.
+        //Podemos crear tantas plantas como puerta como queramos
+        agregarPlantasYPuertas(numplantas, puertas) {
+          console.log(this.plantas.length);
+          let p = this.plantas.length;
+          for (let i = p; i < p + numplantas; i++) {
+            this.plantas[i] = [];
+            for (let j = 0; j < puertas; j++) {
+              this.plantas[i][j] = "";
+            }
+          }
+        }
+        //metodo que modifica el numero de calle
+        modificarNumero(numero) {
+          this.numero = numero;
+        }
+        //metodo que modifica el nombre de la calle
+        modificarCalle(calle) {
+          this.calle = calle;
+        }
+        //metodo que modifica el codigo postal
+        modificarCodigoPostal(codigoPostal) {
+          this.codigoPostal = codigoPostal;
+        }
+
+        //El siguiente metodo es el de imprimir el nombre. No le veo logica de hacerlo de otra manera puesto
+        //que los edificios no tienen un nombre propiamente dicho como variable (no se pide y me ajusto al enunciado).
+        //Hubiera valido con llamar a la propiedad del objeto p.e edificioA.calle
+        imprimeCalle() {
+          return this.calle;
+        }
+
+        //Metodo que imprime el numero del edificio
+        imprimeNumero() {
+          document.write(
+            "El número del edificio de la calle " +
+              this.calle +
+              " es: " +
+              this.numero +
+              "<br>"
+          );
+        }
+        //Metodo que imprime el codigo postal
+        imprimeCodigoPostal() {
+          document.write(
+            "El codigo postal del Edificio de la calle " +
+              this.calle +
+              " numero " +
+              this.numero +
+              " es: " +
+              this.codigoPostal +
+              "<br>"
+          );
+        }
+
+        //metodo que agrega a los propietarios. Como ya he creado el numero de plantas y puertas solamente hay que guardar el 
+        //propietario en la posicion del array correspondiente. A planta y puerta le resto uno para compensar que os indices
+        //comienzan en 0
+        agregarPropietario(nombre, planta, puerta) {
+          this.plantas[planta - 1][puerta - 1] = nombre;
+          document.write(
+            this.plantas[planta - 1][puerta - 1] +
+              " es ahora el propietario de la puerta " +
+              puerta +
+              " de la planta " +
+              planta +
+              "<br>"
+          );
+        }
+
+        //bucle que recorre el array plantas para mostrar los valores de los elementos del array que son los propietarios
+        imprimePlantas() {
+          document.write(
+            "<b>Listado de propietarios del edificio calle " +
+              this.calle +
+              " numero " +
+              this.numero +
+              "</b><br>"
+          );
+          for (let i = 0; i < this.plantas.length; i++) {
+            for (let j = 0; j < this.plantas[i].length; j++) {
+              document.write(
+                "El propietario del piso " +
+                  (j + 1) +
+                  " de la planta " +
+                  (i + 1) +
+                  " es: " +
+                  this.plantas[i][j] +
+                  "<br />"
+              );
+            }
+          }
+        }
+
+        //COnstructor de la clase. Inicia el objeto unicamente con las variables que se nos solicitan y ademas imprime 
+        //el mensaje por pantalla.
+        constructor(calle, numero, codigoPostal) {
+          this.calle = calle;
+          this.numero = numero;
+          this.codigoPostal = codigoPostal;
+          document.write(
+            "Construido nuevo edificio en calle: " +
+              this.calle +
+              ", nº: " +
+              this.numero +
+              ", C.P.: " +
+              this.codigoPostal +
+              "<br />"
+          );
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <script>
+      document.write("<h1>Trabajando con objetos de Javascript</h1>");
+      document.write("<br>");
+      document.write("Instanciamos 3 objetos edificioA, edificioB y edificioC con estos datos: <br>");
+      document.write("<br>");
+      //instancio los tres edificios
+      let edificioA = new Edificio("Garcia Prieto", 58, 15706);
+      let edificioB = new Edificio("Camino Caneiro", 29, 32004);
+      let edificioC = new Edificio("San Clemente", "s/n", 15705);
+      
+      document.write("<br>");
+      //Imprimo el codigo postal del edificio A
+      edificioA.imprimeCodigoPostal();
+      //Imprimo la calle del edificio C
+      document.write("La calle del edificio C es: " + edificioC.imprimeCalle() + "<br>");
+      //Imprimo la calle del edificio B
+      document.write(
+        "El edificio B está situado en la calle " +
+          edificioB.imprimeCalle() +
+          " numero " +
+          edificioB.numero +
+          "<br>"
+      );
+      document.write("<br>");
+      document.write(
+        "Agregamos 2 plantas y 3 puertas por planta al edificio A... <br>"
+      );
+      document.write("<br>");
+      //Metodo donde agregamos 2 plantas y 3 puertas por planta
+      edificioA.agregarPlantasYPuertas(2, 3);
+      document.write("Agregamos 4 propietarios al edificio A...<br>");
+      document.write("<br>");
+      //Metodo para agragar propietarios
+      edificioA.agregarPropietario("Jose Antonio Lopez", 1, 1);
+      edificioA.agregarPropietario("Luisa Martinez", 1, 2);
+      edificioA.agregarPropietario("Marta Castellón", 1, 3);
+      edificioA.agregarPropietario("Antonio Pereira", 2, 3);
+      document.write("<br>");
+      //Imprimimos listado de los propietarios
+      edificioA.imprimePlantas();
+      //agregamos una planta mas y como no dice cuantas puertas pues yo he añadido 5
+      edificioA.agregarPlantasYPuertas(1, 5);
+      //agragamos un nuevo propietario en la planta recien creada
+      edificioA.agregarPropietario("Pedro Meijide", 3, 2);
+      document.write("<br>");
+      //volvemos a imprimir las plantas y pueras con los propietarios
+      edificioA.imprimePlantas();
+      
+      
+    </script>
+  </body>
+</html>
