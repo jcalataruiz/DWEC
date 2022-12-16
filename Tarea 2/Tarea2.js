@@ -30,8 +30,8 @@ const mostrarTabla1 = () => {
 };
 
 //Funcion de la tabla de dividir del 9 con bucle "for"
-const mostrarTabla2 = () => {
-  this.event.preventDefault();
+const mostrarTabla2 = (e) => {
+  e.preventDefault();
   const numero = 9;
   let tabla = document.getElementById("tabla");
   let tablaDividir = `<h1>Tabla de dividir (for) del número ${numero}</h1>`;
@@ -45,8 +45,8 @@ const mostrarTabla2 = () => {
 };
 
 //Funcion de la tabla de multiplicar del 8 con bucle "while"
-const mostrarTabla3 = () => {
-  this.event.preventDefault();
+const mostrarTabla3 = (e) => {
+  e.preventDefault();
   const numero = 8;
   let i = 1;
   let tabla = document.getElementById("tabla");
@@ -62,8 +62,8 @@ const mostrarTabla3 = () => {
 };
 
 //Funcion de la tabla de multiplicar del 7 con bucle "while"
-const mostrarTabla4 = () => {
-  this.event.preventDefault();
+const mostrarTabla4 = (e) => {
+  e.preventDefault();
   const numero = 7;
   let i = 1;
   let tabla = document.getElementById("tabla");

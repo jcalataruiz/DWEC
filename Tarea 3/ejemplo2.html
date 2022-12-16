@@ -6,14 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script type="text/javascript">
-        let numero1= self.prompt("Introduzca un numero");
-        let numero2= self.prompt("Introduzca un numero");
-        alert(numero1*numero2)
+        
+        const alumno=()=>{
+            
+            let nombre=document.getElementById("nombre").value;
+            let apellidos=document.getElementById("apellidos").value;
+            document.write="hola"
+            alert("hola")
+            
+
+        }
 
     </script>
 </head>
 <body>
-    <div id></div>
-    
+    <div id="formulario">
+        <input type="text" name="nombre">Nombre
+        <input type="text" name="apellidos">Apellidos
+        <input type="button" onclick="alumno()" value="aceptar">
+    </div>
+    <div id="alum"></div>
 </body>
 </html>

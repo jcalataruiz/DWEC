@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo3</title>
+    <script>
+        const imprimirNombre=()=>{
+            let nombre=document.getElementById("nombre").value;
+            let apellidos=document.getElementById("apellidos").value;
+            alert(nombre+" "+apellidos);
+            let seccion=document.getElementById("seccion");
+            seccion.innerHTML=nombre;
+            document.getElementById("textarea").text=nombre
+        }
+        const validarNombre=()=>{
+            let nombre=document.getElementById("nombre").value;
+            let regex=/\w/
+            if (regex.test(nombre)) {
+                alert ("todo correcto")
+            }else{
+                alert("nombre vacio")
+            }
+        }
+        class Persona {
+            nombre;
+            apellidos;
+            edad;
+
+            addPersona(nombre,apellidos,edad) {
+
+                this.nombre=nombre
+                this.apellidos=apellidos
+                this.edad=edad
+                
+                
+            }
+        }
+        class Deportista extends Persona{
+                deporte;
+            addDeportista(nombre,apellidos,edad,deporte) {
+                
+                this.nombre=nombre
+                this.apellidos=apellidos
+                this.edad=edad
+                this.deporte=deporte
+                
+            }
+        }
+        // let d=new Deportista;
+        // d.nombre="jose";
+        // d.apellidos="calatayud";
+        // d.edad="42"
+        // d.deporte="Futbol"
+        // let p=new Persona;
+        // p.nombre="Pepe";
+        // p.apellidos="Ruiz";
+        // p.edad="33";
+        // let lista=new Array();
+        // lista.push(d);
+        // lista.push(p);
+        // let win=window.open()
+        // lista.forEach(element => {
+        //     win.document.write("<h1>"+element.nombre+" "+element.apellidos+" "+element.edad+"</h1>")
+
+        // });
+        const add=()=>{
+
+            let nombre=document.getElementById("nombre").value;
+            let apellidos=document.getElementById("apellidos").value;
+            let edad=parseInt(document.getElementById("edad").value);
+            let deporte=document.getElementById("deporte").value;
+            
+            if(deporte!=""){
+                let d=new Deportista;
+                d.addDeportista(nombre,apellidos,edad,deporte);
+                alert(d.nombre+" es un deportista que practica "+d.deporte)
+
+            }else{
+                let p=new Persona;
+                p.addPersona(nombre,apellidos,edad)
+                alert(p.nombre+" es una persona")
+            }
+
+
+        }
+        const multiplicar=()=>{
+            let tabla=document.getElementById("tabla");
+            let numero=document.getElementById("numero").value;
+            let tablaMultiplicar=`<h1>Tabla de multiplicar del numero ${numero}</h1>`
+            tablaMultiplicar+=`<ul>`;
+            for (let i = 1; i < 11; i++) {
+                tablaMultiplicar+=`<li> ${numero} x ${i} = ${numero*i}`;
+                
+            }
+            tablaMultiplicar+=`</ul>`
+            tabla.innerHTML=tablaMultiplicar;
+        }
+
+        
+
+    </script>
+</head>
+<body>
+    <div><input type="text" name="nombre" id="nombre">Nombre</div>
+    <div><input type="text" name="apellidos" id="apellidos">apellidos</div>
+    <div><input type="text" name="edad" id="edad">edad</div>
+    <div><input type="text" name="deporte" id="deporte">deporte</div>
+
+    <input type="button" value="Enviar" onclick="imprimirNombre()">
+    <input type="button" value="Validar" onclick="validarNombre()">
+    <input type="button" value="Añadir" onclick="add()">
+    <div id="seccion"></div>
+    <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+
+    <p>Introduzca un numero: <input type="number" name="numero" id="numero"></p>
+    <p><input type="button" value="multiplicar" onclick="multiplicar()"></p>
+    <div id="tabla"></div>
+</body>
+</html>
