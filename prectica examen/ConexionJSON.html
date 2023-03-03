@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript">
+      window.onload = inicio;
+
+      function inicio() {
+        let nombre=document.getElementById("nombre").value
+        
+        document.getElementsByTagName("p")[0].childNodes[0].nodeValue;
+        console.log(parrafo);
+        let titulo = document.getElementById("parrafo").title;
+
+        console.log(titulo);
+        let nuevoParrafo = document.createElement("p");
+        let texto = "Otra vez campeon de Europa";
+        let nodoTexto = document.createTextNode(texto);
+        nuevoParrafo.appendChild(nodoTexto);
+        document.getElementsByTagName("body")[0].appendChild(nuevoParrafo);
+        let tabla = document.createElement("table");
+        tabla.setAttribute("class", "miTabla");
+        for (let i = 0; i < 10; i++) {
+          let tr = document.createElement("tr");
+
+          for (let j = 0; j < 30; j++) {
+            let td = document.createElement("td");
+            let numero = document.createTextNode("a");
+            td.textContent = j;
+            tr.appendChild(td);
+          }
+          tabla.appendChild(tr);
+        }
+        document.getElementsByTagName("body")[0].append(tabla);
+        let filas = document.getElementsByTagName("tr");
+        console.log(filas);
+        let total = 0;
+        for (let i = 0; i < filas.length; i++) {
+          let fila = filas[i].childNodes;
+          //   console.log(filas[i])
+          //   console.log(fila);
+          for (let j = 0; j < fila.length; j++) {
+            total += parseInt(fila[j].textContent);
+          }
+          console.log(total + "for");
+        }
+        console.log(total + "final");
+        let boton = document.getElementById("boton");
+
+        boton.addEventListener("click", pintar, false);
+        function pintar() {
+          let listatd = document.getElementsByTagName("td");
+          console.log(listatd)
+          for (let i = 0; i < listatd.length; i++) {
+            listatd[i].setAttribute("class","miClase");
+            listatd[i].style.width="10 px"
+            listatd[i].style.height="10 px"
+            listatd[i].addEventListener("click",function(){
+                
+                alert(this.getAttribute("class"))
+                
+            })
+            
+          }
+        }
+
+      }
+    </script>
+  </head>
+  <body>
+    <div class="resultado"></div>
+    <input id="nombre" type="submit" name="nombre">
+    <input id="boton" type="button" value="estilo" />
+    <p id="parrafo" title="Texto de un párrafo">
+      Esto es un ejemplo de texto HTML que puedes tener en tu documento.
+    </p>
+  </body>
+</html>

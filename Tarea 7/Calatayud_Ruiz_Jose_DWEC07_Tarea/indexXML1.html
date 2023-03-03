@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejemplo AJAX con datos en XML</title>
+  </head>
+
+  <body>
+    <h1>Buscar películas</h1>
+    <form>
+      <input type="text" id="search-input" />
+      <button type="submit">Buscar</button>
+    </form>
+    <ul id="movie-list"></ul>
+
+    <script>
+      //Obtenemos los elementos HTML necesarios
+      const form = document.querySelector("form");
+      const titulo = document.getElementById("search-input");
+      const listaPeliculas = document.getElementById("movie-list");
+
+      form.addEventListener("submit", (event) => {
+        //Prevenimos que se recargue la página al enviar el formulario
+        event.preventDefault();
+        //Obtenemos el valor del input y eliminamos los espacios en blanco al principio y al final
+        const searchValue = titulo.value.trim();
+
+        if (!searchValue) {
+          //Si el valor está vacío, no hacemos nada
+          return;
+        }
+
+        //Creamos una instancia del objeto XMLHttpRequest para hacer la petición
+        const peticion = new XMLHttpRequest();
+
+        //Definimos la función que se llamará cada vez que cambie el estado de la petición
+        peticion.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            //Si la petición fue exitosa, obtenemos los datos XML de la respuesta
+            const xmlData = peticion.responseXML;
+            //Obtenemos los elementos 'result' del XML que corresponden a las películas
+            const movies = xmlData.getElementsByTagName("result");
+            //Vaciamos la lista de películas
+            listaPeliculas.innerHTML = "";
+
+            if (movies && movies.length > 0) {
+              //Si hay películas, recorremos el arreglo y creamos un elemento <li> por cada una
+              for (let i = 0; i < movies.length; i++) {
+                const movie = movies[i];
+                //Creamos un elemento <li> para la película
+                const li = document.createElement("li");
+                //Si la película tiene un poster válido, agregamos la imagen
+                const poster =
+                  movie.getAttribute("poster") !== "N/A"
+                    ? `<img src="${movie.getAttribute(
+                        "poster"
+                      )}" alt="${movie.getAttribute("title")} poster">`
+                    : "";
+                //Creamos el contenido HTML para la película
+                li.innerHTML = `<h2>${movie.getAttribute(
+                  "title"
+                )} (${movie.getAttribute(
+                  "year"
+                )})</h2>${poster}<p>${movie.getAttribute("type")}</p>`;
+                //Agregamos el elemento <li> a la lista de películas
+                listaPeliculas.appendChild(li);
+              }
+            } else {
+              //Si no hay películas, creamos un elemento <h1> que muestra un mensaje de error
+              const li = document.createElement("h1");
+              li.textContent = "No se encontraron resultados";
+              listaPeliculas.appendChild(li);
+            }
+          }
+        };
+
+        //Abrimos la conexión con el servidor OMDB API y hacemos la petición para buscar películas
+        peticion.open(
+          "GET",
+          `http://www.omdbapi.com/?apikey=dd54e4e2&r=xml&s=${searchValue}`
+        );
+        //Definimos que la respuesta será un documento XML
+        peticion.responseType = "document";
+        //Enviamos la petición
+        peticion.send();
+      });
+    </script>
+  </body>
+</html>

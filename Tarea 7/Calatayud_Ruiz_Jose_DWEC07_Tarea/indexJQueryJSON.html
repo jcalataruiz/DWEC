@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejemplo AJAX con datos en JSON y JQuery</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>Buscar películas</h1>
+    <form id="form">
+      <input type="text" id="search-input" />
+      <button type="submit">Buscar</button>
+    </form>
+    <div id="container"></div>
+    <script>
+      // Se obtienen los elementos del DOM con los que se van a trabajar
+      let form = $("#form");
+      let titulo = $("#search-input");
+
+      // Se agrega un listener al submit del formulario para que no se recargue la página al enviarlo
+      form.on("submit", (event) => {
+        event.preventDefault();
+        // Se obtiene el valor del input y se elimina cualquier espacio en blanco al inicio o final
+        const searchValue = titulo.val().trim();
+
+        // Si el input está vacío, no se hace nada
+        if (!searchValue) {
+          return;
+        }
+
+        // Se hace una petición ajax a la API de OMDB con el valor del input
+        $.ajax({
+          //Se usa la URL que envia los datos en formato JSON
+          url: `http://www.omdbapi.com/?apikey=dd54e4e2&s=${searchValue}`,
+          type: "GET",
+          dataType: "json",
+          success: function (jsonData) {
+            // Si se obtiene una respuesta exitosa, se obtiene la lista de películas en formato JSON
+            const movies = jsonData.Search;
+
+            // Si hay películas en la respuesta, se recorre la lista y se muestran en el contenedor correspondiente
+            if (movies && movies.length > 0) {
+              movies.forEach(function (movie) {
+                // Si hay una imagen disponible, se agrega al HTML, de lo contrario no se muestra nada
+                const poster =
+                  movie.Poster !== "N/A"
+                    ? `<img src="${movie.Poster}" alt="${movie.Title} poster">`
+                    : "";
+                $("#container").append(`<h2>${movie.Title} (${movie.Year})</h2>
+                              ${poster}
+                              <p>${movie.Type}</p>`);
+              });
+            } else {
+              // Si no se encontraron películas, se muestra un mensaje
+            }
+          },
+          error: function () {
+            // Si hay un error en la petición, se muestra un mensaje de error
+            $("#container").text("Error al buscar películas");
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

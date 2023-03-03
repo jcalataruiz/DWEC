@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejemplo AJAX con datos en XML y JQuery</title>
+    <!-- Incluimos la librería jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>Buscar películas</h1>
+    <!-- Creamos un formulario para buscar películas -->
+    <form id="form">
+      <input type="text" id="search-input" />
+      <button type="submit">Buscar</button>
+    </form>
+    <!-- Creamos un contenedor para mostrar la información de las películas -->
+    <div id="container"></div>
+
+    <script>
+      // Obtenemos los elementos del DOM que vamos a necesitar
+      let form = $("#form");
+      let titulo = $("#search-input");
+
+      // Añadimos un listener para el evento submit del formulario de búsqueda
+      form.on("submit", (event) => {
+        // Prevenimos el comportamiento por defecto del formulario (recargar la página)
+        event.preventDefault();
+        // Obtenemos el valor del input de búsqueda y eliminamos espacios en blanco al principio y al final
+        const searchValue = titulo.val().trim();
+
+        // Si no hay ningún valor de búsqueda, no hacemos nada
+        if (!searchValue) {
+          return;
+        }
+
+        // Realizamos una petición AJAX a la API de OMDB para buscar películas con el valor de búsqueda
+        $.ajax({
+          //usamos la url que devuelve los datos en formato XML
+          url: `http://www.omdbapi.com/?apikey=dd54e4e2&r=xml&s=${searchValue}`,
+          type: "GET",
+          dataType: "xml",
+          success: function (xmlData) {
+            // Obtenemos un array con los resultados de búsqueda
+            const movies = $(xmlData).find("result");
+            // Si se encontraron películas
+            if (movies && movies.length > 0) {
+              // Iteramos por cada película y creamos un elemento con su información
+              for (let i = 0; i < movies.length; i++) {
+                const movie = movies[i];
+                // Si hay un póster disponible, lo mostramos. Si no, dejamos el espacio vacío
+                const poster =
+                  movie.getAttribute("poster") !== "N/A"
+                    ? `<img src="${movie.getAttribute(
+                        "poster"
+                      )}" alt="${movie.getAttribute("title")} poster">`
+                    : "";
+                // Creamos un elemento con el título, año, póster (si hay) y tipo de la película
+                $("#container").append(
+                  `<h2>${movie.getAttribute("title")} (${movie.getAttribute(
+                    "year"
+                  )})</h2>${poster}<p>${movie.getAttribute("type")}</p>`
+                );
+              }
+            } else {
+              // Si no se encontraron películas, mostramos un mensaje de error
+              $("#container").text("No se encontraron resultados");
+            }
+          },
+          //Si hay error en la busqueda de las peliculas, mostramos un mensaje de error
+          error: function () {
+            $("#container").text("Error al buscar películas");
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

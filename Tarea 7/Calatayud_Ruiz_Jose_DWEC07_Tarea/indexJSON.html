@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejemplo AJAX con datos en JSON</title>
+  </head>
+  <body>
+    <h1>Buscar películas</h1>
+    <form>
+      <input type="text" id="search-input" />
+      <button type="submit">Buscar</button>
+    </form>
+    <ul id="movie-list"></ul>
+    <script>
+      // Obtener los elementos del DOM que se van a utilizar
+      let form = document.querySelector("form");
+      let titulo = document.getElementById("search-input");
+      let listaPeliculas = document.getElementById("movie-list");
+
+      // Agregar un event listener al formulario que se activa cuando se hace submit
+      form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+        let searchValue = titulo.value.trim(); // Obtener el valor del input y limpiar los espacios en blanco al principio y al final
+
+        if (!searchValue) {
+          // Si el valor está vacío, no hacer nada
+          return;
+        }
+
+        let peticion = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest para hacer la petición HTTP
+
+        // Definir una función que se ejecutará cuando cambie el estado de la petición
+        peticion.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            // Si la petición se completó correctamente
+            let jsonData = JSON.parse(peticion.responseText); // Convertir la respuesta en formato JSON a un objeto JavaScript
+
+            let movies = jsonData.Search; // Obtener el array de películas del objeto JSON
+            console.log(movies);
+
+            listaPeliculas.innerHTML = ""; // Limpiar la lista de películas
+
+            if (movies && movies.length > 0) {
+              // Si hay películas en el array
+              for (let i = 0; i < movies.length; i++) {
+                // Recorrer el array de películas
+                let movie = movies[i];
+                let li = document.createElement("li"); // Crear un elemento de lista para cada película
+                let poster =
+                  movie.Poster !== "N/A"
+                    ? `<img src="${movie.Poster}" alt="${movie.Title} poster">`
+                    : ""; // Si la película tiene poster, crear una etiqueta img con su URL
+                li.innerHTML = `<h2>${movie.Title} (${movie.Year})</h2>
+                              ${poster}
+                              <p>${movie.Type}</p>`; // Agregar el título, año, poster (si existe) y tipo de la película al elemento de lista
+                listaPeliculas.appendChild(li); // Agregar el elemento de lista a la lista de películas en el DOM
+              }
+            } else {
+              // Si no hay películas en el array
+              let li = document.createElement("li");
+              li.textContent = "No se encontraron resultados";
+              listaPeliculas.appendChild(li);
+            }
+          }
+        };
+
+        peticion.open(
+          "GET",
+          `http://www.omdbapi.com/?apikey=dd54e4e2&s=${searchValue}`
+        ); // Configurar la petición GET con la URL y la API key
+        peticion.send(); // Enviar la petición
+      });
+    </script>
+  </body>
+</html>

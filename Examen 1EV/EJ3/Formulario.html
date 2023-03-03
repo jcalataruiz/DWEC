@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Ejercicio 3</title>
+        <script type="text/javascript" src="scriptSolucion.js"></script>
+        <style type="text/css">
+            label{
+                width: 170px;
+                float:left;
+                margin-bottom:5px;     
+            }
+            input,select {
+                width:150px;
+                float:left;
+                margin-bottom:5px;
+            }
+            fieldset{
+                background:#66CCCC;
+                width:360px;
+                border: thick solid #306;
+            }
+            legend{
+                border-top-width: medium;
+                border-right-width: medium;
+                border-bottom-width: medium;
+                border-left-width: medium;
+                border-top-style: solid;
+                border-right-style: solid;
+                border-bottom-style: solid;
+                border-left-style: solid;
+                background-color: #FFF;     
+            }
+            #mensajes{
+                float: left;
+                background:#33FF33;
+                width: 325px;
+            }
+            #errores{
+                float: left;
+                background:#FF6633;
+                width: 325px;
+            }
+            .error{
+                border: solid 2px #FF0000;
+            }
+        </style>
+    </head>
+    <body>
+        <fieldset>
+            <legend>Ejercicio 3</legend>
+            <form name="formulario" id="formulario" action="http://www.google.es" method="get">
+                <label for="nombre">Nombre *:</label>
+                <input type="text" name="nombre" id="nombre" />
+                <label for="apellido1">Primer Apellido *:</label>
+                <input type="text" name="apellido1" id="apellido1" />
+				<label for="apellido2">Segundo Apellido:</label>
+                <input type="text" name="apellido2" id="apellido2" />
+				<label for="fecha">Fecha Nacimiento:</label>
+                <input name="fecha" type="text" id="fecha" />
+                <label for="dni">DNI:</label>
+                <input name="dni" type="text" id="dni" />
+                <label for="email">E-mail *:</label>
+                <input name="email" type="text" id="email" />
+                <label for="password1">Contraseña *:</label>
+                <input name="password1" type="text" id="password1" />
+				<label for="password2">Contraseña(repetición) *:</label>
+                <input name="password2" type="text" id="password2" />
+				<input type="reset" name="limpiar" id="button" value="Limpiar" />
+                <input type="submit" name="enviar" id="enviar" value="Enviar datos" />
+            </form> 
+            <div id="errores"></div>
+        </fieldset>
+    </body>
+</html>
+
